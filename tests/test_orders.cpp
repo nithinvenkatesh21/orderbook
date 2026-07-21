@@ -10,7 +10,7 @@
 using namespace orderbook;
 
 void TestOrderCreationAndGetters() {
-    Order order(OrderType::GoodTillCancel, 1001, Side::Buy, 150, 10);
+    [[maybe_unused]] Order order(OrderType::GoodTillCancel, 1001, Side::Buy, 150, 10);
     assert(order.GetOrderId() == 1001);
     assert(order.GetSide() == Side::Buy);
     assert(order.GetPrice() == 150);
@@ -62,19 +62,19 @@ void TestMarketOrderConversion() {
 }
 
 void TestOrderModifyAndTrade() {
-    OrderModify modify(2001, Side::Sell, 300, 100);
+    [[maybe_unused]] OrderModify modify(2001, Side::Sell, 300, 100);
     assert(modify.GetOrderId() == 2001);
     assert(modify.GetSide() == Side::Sell);
     assert(modify.GetPrice() == 300);
     assert(modify.GetQuantity() == 100);
 
-    auto convertedPtr = modify.ToOrderPointer(OrderType::GoodTillCancel);
+    [[maybe_unused]] auto convertedPtr = modify.ToOrderPointer(OrderType::GoodTillCancel);
     assert(convertedPtr->GetOrderId() == 2001);
     assert(convertedPtr->GetOrderType() == OrderType::GoodTillCancel);
 
     TradeInfo bidTrade{1, 100, 10};
     TradeInfo askTrade{2, 100, 10};
-    Trade trade(bidTrade, askTrade);
+    [[maybe_unused]] Trade trade(bidTrade, askTrade);
     assert(trade.GetBidTrade().orderId == 1);
     assert(trade.GetAskTrade().orderId == 2);
 }

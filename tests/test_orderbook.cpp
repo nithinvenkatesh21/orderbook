@@ -11,7 +11,7 @@ void TestSimpleLimitMatch() {
 
     // Add Sell order: Price 100, Quantity 10
     auto sellOrder = std::make_shared<Order>(OrderType::GoodTillCancel, 1, Side::Sell, 100, 10);
-    auto trades1 = book.AddOrder(sellOrder);
+    [[maybe_unused]] auto trades1 = book.AddOrder(sellOrder);
     assert(trades1.empty());
     assert(book.Size() == 1);
 
@@ -21,7 +21,7 @@ void TestSimpleLimitMatch() {
     assert(trades2.size() == 1);
     assert(book.Size() == 0);
 
-    const auto& trade = trades2.front();
+    [[maybe_unused]] const auto& trade = trades2.front();
     assert(trade.GetBidTrade().orderId == 2);
     assert(trade.GetAskTrade().orderId == 1);
     assert(trade.GetBidTrade().quantity == 10);
@@ -38,7 +38,7 @@ void TestPartialFillAndCancel() {
 
     // Add Buy order: Price 200, Quantity 20 (partial fill)
     auto buyOrder = std::make_shared<Order>(OrderType::GoodTillCancel, 11, Side::Buy, 200, 20);
-    auto trades = book.AddOrder(buyOrder);
+    [[maybe_unused]] auto trades = book.AddOrder(buyOrder);
     assert(trades.size() == 1);
     assert(sellOrder->GetRemainingQuantity() == 30);
     assert(book.Size() == 1);
@@ -61,7 +61,7 @@ void TestOrderModify() {
     book.ModifyOrder(modifyReq);
     assert(book.Size() == 1);
 
-    auto infos = book.GetOrderInfos();
+    [[maybe_unused]] auto infos = book.GetOrderInfos();
     assert(infos.GetBids().size() == 1);
     assert(infos.GetBids().front().price == 55);
     assert(infos.GetBids().front().quantity == 150);

@@ -2,7 +2,6 @@
 
 ![CI](https://github.com/nithinvenkatesh21/orderbook/actions/workflows/ci.yml/badge.svg)
 ![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 A modern, thread-safe, ultra-low-latency limit order book (LOB) matching engine implemented in standard C++20. Designed for high-frequency trading (HFT) financial systems, supporting order matching algorithms, background thread-safe order pruning, and market depth tracking.
 
@@ -128,9 +127,3 @@ int main() {
     return 0;
 }
 ```
-
----
-
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for details.
