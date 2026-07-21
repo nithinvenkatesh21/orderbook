@@ -11,6 +11,7 @@ lib/
 .DS_Store
 .idea/
 .vscode/
+.cache/
 *.swp
 
 # Temporary clone directory
