@@ -7,12 +7,16 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Find Threads library for POSIX/Linux pthreads
+find_package(Threads REQUIRED)
+
 # Orderbook Core Library
 add_library(orderbook STATIC src/Orderbook.cpp)
 target_include_directories(orderbook PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
+target_link_libraries(orderbook PUBLIC Threads::Threads)
 
 # Driver Application Executable
 add_executable(orderbook_app src/main.cpp)
