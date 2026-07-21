@@ -1,0 +1,17 @@
+# Build output
+build/
+bin/
+lib/
+*.o
+*.a
+*.dylib
+*.so
+
+# IDE / System
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Temporary clone directory
+.temp_src/
