@@ -15,15 +15,22 @@ target_include_directories(orderbook_core INTERFACE
     $<INSTALL_INTERFACE:include>
 )
 
-# Test executable for PR 1
+# Test executables
 add_executable(test_types tests/test_types.cpp)
 target_link_libraries(test_types PRIVATE orderbook_core)
 
+add_executable(test_orders tests/test_orders.cpp)
+target_link_libraries(test_orders PRIVATE orderbook_core)
+
 if(MSVC)
     target_compile_options(test_types PRIVATE /W4 /WX)
+    target_compile_options(test_orders PRIVATE /W4 /WX)
 else()
     target_compile_options(test_types PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    target_compile_options(test_orders PRIVATE -Wall -Wextra -Wpedantic -Werror)
 endif()
 
 enable_testing()
 add_test(NAME CoreTypesTest COMMAND test_types)
+add_test(NAME DomainOrdersTest COMMAND test_orders)
+
