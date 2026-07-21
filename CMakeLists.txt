@@ -14,7 +14,11 @@ target_include_directories(orderbook PUBLIC
     $<INSTALL_INTERFACE:include>
 )
 
-# Test executables
+# Driver Application Executable
+add_executable(orderbook_app src/main.cpp)
+target_link_libraries(orderbook_app PRIVATE orderbook)
+
+# Test Executables
 add_executable(test_types tests/test_types.cpp)
 target_link_libraries(test_types PRIVATE orderbook)
 
@@ -24,19 +28,27 @@ target_link_libraries(test_orders PRIVATE orderbook)
 add_executable(test_orderbook tests/test_orderbook.cpp)
 target_link_libraries(test_orderbook PRIVATE orderbook)
 
+add_executable(test_benchmark tests/test_benchmark.cpp)
+target_link_libraries(test_benchmark PRIVATE orderbook)
+
 if(MSVC)
     target_compile_options(orderbook PRIVATE /W4 /WX)
+    target_compile_options(orderbook_app PRIVATE /W4 /WX)
     target_compile_options(test_types PRIVATE /W4 /WX)
     target_compile_options(test_orders PRIVATE /W4 /WX)
     target_compile_options(test_orderbook PRIVATE /W4 /WX)
+    target_compile_options(test_benchmark PRIVATE /W4 /WX)
 else()
     target_compile_options(orderbook PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    target_compile_options(orderbook_app PRIVATE -Wall -Wextra -Wpedantic -Werror)
     target_compile_options(test_types PRIVATE -Wall -Wextra -Wpedantic -Werror)
     target_compile_options(test_orders PRIVATE -Wall -Wextra -Wpedantic -Werror)
     target_compile_options(test_orderbook PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    target_compile_options(test_benchmark PRIVATE -Wall -Wextra -Wpedantic -Werror)
 endif()
 
 enable_testing()
 add_test(NAME CoreTypesTest COMMAND test_types)
 add_test(NAME DomainOrdersTest COMMAND test_orders)
 add_test(NAME MatchingEngineTest COMMAND test_orderbook)
+add_test(NAME BenchmarkTest COMMAND test_benchmark)
